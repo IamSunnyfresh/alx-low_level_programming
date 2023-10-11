@@ -1,27 +1,26 @@
 #include "function_pointers.h"
 
 /**
- * int_index - search for an integer
- * @array: target array holding integers
+ * array_iterator - iterate through a given array set
+ * @array: target array
  * @size: array size
- * @cmp: function pointer to compare search integer term
+ * @action: function pointer to array
  *
- * Return: int element match, -1 if size <= 0
+ * Return: void
  */
-int int_index(int *array, int size, int (*cmp)(int))
+void array_iterator(int *array, size_t size, void (*action)(int))
 {
-	/* declare iter var */
-	int i;
+	int i; /* declare iter var */
 
-	/* set condition if array/cmp point to nothing */
-	if (array == NULL || cmp == NULL)
-		return (-1);
+	/* set condition for if array & size point to nothing */
+	if (array == NULL || action  == NULL)
+		return;
 
-	/* iterate through array and compare elements */
-	for (i = 0; i < size; i++)
+	/* iterate through array */
+	for (i = 0; size > 0; i++)
 	{
-		if (cmp(array[i]) != 0) /* if element in array */
-			return (i); /* return index of elem */
+		action(*array); /* function call */
+		array++; /* update array step */
+		size--; /* decrease size */
 	}
-	return (-1); /* return if elem does not match */
 }
